@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i');
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header{
+    background-color: #FF0000;
+    height: 50px;
+}
+
+.site-title{
+    display: inline-block;
+    color: white;
+    line-height: 3.2em;
+    margin-left: 12px;
+}
+.title-limbo{
+    display: inline-block;
+    font-size:1.6em;
+}
+.title-lostandfound{
+    display: inline-block;
+    font-size:0.9em;
+}
+
+.account-buttons{
+    float: right;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.account-button{
+    height: 30px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.content-container{
+    height: calc(100% - 150px);
+    min-height: 600px;
+}
+
+.page-content{
+    float: right;
+    width: calc(100% - 200px);
+}
+.lf-buttons{
+    padding-top: 20px;
+    padding-bottom:20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.lf-button{
+    background-color: #FF0000;
+    height:40px;
+    border: none;
+    border-radius: 5px;
+    vertical-align: middle;
+    width: 40%;
+    font-size: 1.2em;
+    color: white;
+}
+
+.sidebar{
+    background-color: #4D4D4D;
+    height: 100%;
+    float: left;
+    width: 250px;
+}
+
+footer{
+    height: 100px;
+    background-color: #808080;
+}
+.footer-author{
+    color: #E0E0E0;
+    text-align: center;
+    font-size: 0.8em;
+    padding-top:75px;
+}
