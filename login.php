@@ -11,10 +11,12 @@
     </head>
     <body>
     <header>
+        <a href="/index.php">
         <div class="site-title">
             <div class="title-limbo"><b>Limbo</b></div>
             <div class="title-lostandfound"><i>&nbsp;lost & found</i></div>
         </div>
+        </a>
         <div class="account-buttons">
             <button type="button" class="account-button">Placeholder</button>
         </div>
@@ -29,7 +31,15 @@
             </div>
         </div>
         <div class="page-content">
-            
+            <h1>Log In</h1>
+            <div class="form-container">
+            <form class="login-form" action="/login.php" method="post">
+                Email: <br><input class="login-field" type="text" name="email"> <br>
+                Password: <br><input class="login-field" type="password" name="password"><br>
+                <input class="login-submit" type="submit" value="Log in"><br>
+                <p><a href="/changepassword.php">Change password</a></p>
+            </form>
+            </div>
         </div>
     </div>
     <footer>

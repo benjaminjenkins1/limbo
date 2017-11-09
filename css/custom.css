@@ -10,6 +10,10 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+h1{
+    margin:0;
+}
+
 header{
     background-color: #FF0000;
     height: 50px;
@@ -50,7 +54,8 @@ header{
 
 .page-content{
     float: right;
-    width: calc(100% - 200px);
+    width: calc(100% - 280px);
+    padding:15px;
 }
 .lf-buttons{
     padding-top: 20px;
@@ -67,6 +72,26 @@ header{
     width: 40%;
     font-size: 1.2em;
     color: white;
+}
+
+.login-form{
+    display: inline-block;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+.form-container{
+    text-align: left;
+    width: 100%;
+}
+.login-field{
+    width: 200px;
+}
+.login-submit{
+    width: 80px;
+    height: 30px;
+    box-sizing: content-box;
+    margin-top: 10px;
 }
 
 .sidebar{

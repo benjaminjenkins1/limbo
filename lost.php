@@ -11,10 +11,12 @@
     </head>
     <body>
     <header>
+        <a href="/index.php">
         <div class="site-title">
             <div class="title-limbo"><b>Limbo</b></div>
             <div class="title-lostandfound"><i>&nbsp;lost & found</i></div>
         </div>
+        </a>
         <div class="account-buttons">
             <button type="button" class="account-button">Placeholder</button>
         </div>
