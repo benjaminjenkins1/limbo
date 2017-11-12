@@ -11,14 +11,14 @@ body{
 }
 
 h1{
-    margin:0;
+    margin:0 0 0 12px;
 }
 
 header{
     background-color: #FF0000;
     height: 50px;
+    box-shadow: 0px 3px 5px #888888;
 }
-
 .site-title{
     display: inline-block;
     color: white;
@@ -33,18 +33,20 @@ header{
     display: inline-block;
     font-size:0.9em;
 }
-
-.account-buttons{
+.account-links{
     float: right;
-    padding-top: 10px;
-    padding-right: 10px;
+    padding-top: 14px;
 }
-.account-button{
+.account-link{
     height: 30px;
     background-color: white;
     border: none;
     border-radius: 5px;
     font-size: 0.9em;
+    margin-right:15px;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
 }
 
 .content-container{
@@ -93,6 +95,9 @@ header{
     box-sizing: content-box;
     margin-top: 10px;
 }
+.register-errors{
+    color:red;
+}
 
 .sidebar{
     background-color: #4D4D4D;
@@ -100,14 +105,26 @@ header{
     float: left;
     width: 250px;
 }
+.sidebar-title{
+    background-color: #808080;
+    color: #CCCCCC;
+    padding: 5px 0 5px 12px;
+}
+.sidebar-title a{
+    color: #CCCCCC;
+}
 
 footer{
     height: 100px;
     background-color: #808080;
+    box-shadow: 0px -3px 5px #888888;
 }
 .footer-author{
     color: #E0E0E0;
     text-align: center;
     font-size: 0.8em;
-    padding-top:75px;
+    padding-top:60px;
+}
+.footer-author a{
+    color: #E0E0E0;
 }

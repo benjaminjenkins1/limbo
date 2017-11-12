@@ -1,11 +1,13 @@
 /*
 This file creates the limbo database and the users, locations, and stuff tables for the database.
 This file also populates the locations table.
-This file also adds the administrator with email "admin@limbo.com" and password "letmein" (sha256).
+This file also adds the default administrator with email "admin@limbo.com" and password "letmein" (hash is sha256).
 
 Author: Benjamin Jenkins
 Version: 1.1
 */
+
+DROP DATABASE limbo_db;
 
 CREATE DATABASE IF NOT EXISTS limbo_db;
 
@@ -36,7 +38,7 @@ CREATE TABLE items(
     description TEXT NOT NULL,
     create_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date DATETIME ON UPDATE CURRENT_TIMESTAMP,
-    owner_id INTEGER,
+    owner_id INTEGER NOT NULL,
     claimer_id INTEGER,
     status ENUM('lost','found'),
     FOREIGN KEY (loc_id) REFERENCES locations(loc_id),

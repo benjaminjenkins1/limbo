@@ -1,0 +1,25 @@
+<?php
+
+$logged_in = false;
+
+?>
+
+<header>
+    <a href="/index.php">
+        <div class="site-title">
+            <div class="title-limbo"><b>Limbo</b></div>
+            <div class="title-lostandfound"><i>&nbsp;lost & found</i></div>
+        </div>
+    </a>
+    <div class="account-links">
+        <?php 
+            if(!$logged_in){
+                echo '<a class="account-link" href="/login.php">Log In</a>';
+                echo '<a class="account-link" href="/register.php">Register</a>';
+            } 
+            else{
+                echo '<a class="account-link" href="/logout.php">Log Out</a>';
+            }
+        ?>
+    </div>
+</header>

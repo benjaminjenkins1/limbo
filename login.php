@@ -10,26 +10,9 @@
     <link rel="stylesheet" href="/css/custom.css" type="text/css">
     </head>
     <body>
-    <header>
-        <a href="/index.php">
-        <div class="site-title">
-            <div class="title-limbo"><b>Limbo</b></div>
-            <div class="title-lostandfound"><i>&nbsp;lost & found</i></div>
-        </div>
-        </a>
-        <div class="account-buttons">
-            <button type="button" class="account-button">Placeholder</button>
-        </div>
-    </header>
+    <?php require"includes/header.php"; ?>
     <div class="content-container">
-        <div class="sidebar">
-            <div class="sidebar-login">
-            </div>
-            <div class="sidebar-lost">
-            </div>
-            <div class="sidebar-found">
-            </div>
-        </div>
+        <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <h1>Log In</h1>
             <div class="form-container">
@@ -42,8 +25,6 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="footer-author">By Benjamin Jenkins</div>
-    </footer>
+    <?php require('includes/footer.php'); ?>
     </body>
 </html>
