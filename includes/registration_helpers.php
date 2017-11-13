@@ -22,15 +22,44 @@ function validate_registration($fname, $lname, $email, $password){
     if(strlen($email)>50)
         $errors = $errors . 'Email must be 50 characters or fewer<br>';
     if(strlen($password)>50)
-        $errors = $errors . 'Pasword must be 50 characters or fewer<br>';
+        $errors = $errors . 'Pasword must be between 8 and 50 characters<br>';
+    if(strlen($password)<8)
+        $errors = $errors . 'Pasword must be between 8 and 50 characters<br>';
 
     # Validate email with regex
-    $email_pattern = '/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD';
+    $email_pattern = '/.+' . preg_quote('@marist.edu') . '/';
     # Thanks to email-regex.com
     if(!empty($email) and !preg_match($email_pattern,$email))
         $errors = $errors . 'Invalid email';
 
     return $errors;
+
+}
+
+function register_user($fname,$lname,$email,$password){
+
+    require('includes/connect_db.php');
+    require('includes/helpers.php');
+
+    $salt = random_str(16);
+    $hashed_pw = hash('sha256', $salt . $password);
+
+    $query = 'INSERT INTO users (email, pass_hash, pass_salt, fname, lname) VALUES ("' . $email . '", "' . $hashed_pw . '", "' . $salt . '", "' . $fname . '", "' . $lname . '")';
+    
+    $results = mysqli_query($dbc, $query);
+
+    if($results != true){
+        echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
+        mysqli_free_result($results);
+    }
+
+    else{
+        mysqli_free_result($results);        
+        session_start( );
+        header("Location: /registration_thankyou.php");
+        exit();
+
+    }
 
 }
 

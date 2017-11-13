@@ -9,6 +9,10 @@ $logged_in = false;
         <div class="site-title">
             <div class="title-limbo"><b>Limbo</b></div>
             <div class="title-lostandfound"><i>&nbsp;lost & found</i></div>
+            <?php 
+                if($_SERVER['PHP_SELF'] != '/index.php')
+                    echo '<img class="homebutton" src="/images/home.svg">';
+            ?>
         </div>
     </a>
     <div class="account-links">

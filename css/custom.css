@@ -33,6 +33,13 @@ header{
     display: inline-block;
     font-size:0.9em;
 }
+.homebutton{
+    width: 40px;
+    height: 50px;
+    position: absolute;
+    top: 4px;
+    left: 188px;
+}
 .account-links{
     float: right;
     padding-top: 14px;
@@ -50,23 +57,27 @@ header{
 }
 
 .content-container{
+    width: 100%;
     height: calc(100% - 150px);
-    min-height: 600px;
+    min-height: 750px;
+    max-width: 100%;
+    clear: both;
+    margin: 0 auto;
+}
+.page-content{
+    width: calc(100% - 250px);
+    float: right;
 }
 
-.page-content{
-    float: right;
-    width: calc(100% - 280px);
-    padding:15px;
-}
-.lf-buttons{
+.lf-links{
     padding-top: 20px;
     padding-bottom:20px;
     display: flex;
     justify-content: space-evenly;
 }
-.lf-button{
+.lf-link{
     background-color: #FF0000;
+    text-align:center;
     height:40px;
     border: none;
     border-radius: 5px;
@@ -74,6 +85,8 @@ header{
     width: 40%;
     font-size: 1.2em;
     color: white;
+    line-height: 40px;
+    text-decoration: none;
 }
 
 .login-form{
@@ -112,6 +125,28 @@ header{
 }
 .sidebar-title a{
     color: #CCCCCC;
+}
+
+.items-list{
+    margin: 0 auto;
+    width: 80%;
+}
+.items-list table{
+    background-color: #CCCCCC;
+    width: 100%;
+    margin-bottom: 3px;
+}
+.items-list-right{
+    text-align:right;
+}
+.list-options{
+    margin: 0 auto 5px auto;
+    width: 80%;
+}
+.page-numbers{
+    margin: 5px auto 0 auto;
+    width: 80%;
+    text-align:center;
 }
 
 footer{

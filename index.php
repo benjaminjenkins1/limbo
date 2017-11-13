@@ -1,3 +1,25 @@
+<?php
+
+require('includes/items.php');
+
+$time = 7;
+$sort = 'newest';
+
+if(isset($_GET['time']))
+    $time = intval($_GET['time']);
+
+if(isset($_GET['sort']))
+    $sort = $_GET['sort'];
+
+$page = 1;
+
+if(isset($_GET['page']))
+    $page = intval($_GET['page']);
+
+$num_pages = get_num_pages();
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +36,30 @@
     <div class="content-container">
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
-            <div class="lf-buttons">
-                <button type="button" class="lf-button">I lost something!</button>
-                <button type="button" class="lf-button">I found something!</button>
+            <div class="lf-links">
+                <a href="/lost.php" class="lf-link">I lost something!</a>
+                <a href="/found.php" class="lf-link">I found something!</a>
             </div>
+            <div class="list-options">
+                Sort by:
+                <select id="sort-select" onchange="changeSort()">
+                    <option <?php if($sort == 'newest') echo 'selected="selected"'; ?> value="newest">newest first</option>
+                    <option <?php if($sort == 'oldest') echo 'selected="selected"'; ?> value="oldest">oldest first</option>
+                </select>
+            </div>  
+            <?php 
+            
+            show_items($time, $sort, $page); 
+            
+            echo '<p class="page-numbers">Page:';
+
+            for ($i = 1; $i <= $num_pages; $i++) {
+                echo ' <a href="/index.php?page=' . $i . '&sort=' . $sort . '&time=' . $time . '">' . $i . '</a> ';
+            }
+
+            echo '</p>';
+
+            ?>
         </div>
     </div>
     <?php require('includes/footer.php'); ?>

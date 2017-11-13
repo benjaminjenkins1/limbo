@@ -1,3 +1,25 @@
+<?php
+
+require('includes/login_helpers.php');
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if(user_validated($email, $password)){
+        new_cookie($email);
+        session_start( );
+        header("Location: /index.php");
+        exit();
+    }
+    else
+        $wrongpassword = true;
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +39,7 @@
             <h1>Log In</h1>
             <div class="form-container">
             <form class="login-form" action="/login.php" method="post">
+                <?php if(isset($wrongpassword)) echo '<p style="color:red;">Incorrect username or pasword</p>'; ?>
                 Email: <br><input class="login-field" type="text" name="email"> <br>
                 Password: <br><input class="login-field" type="password" name="password"><br>
                 <input class="login-submit" type="submit" value="Log in"><br>
