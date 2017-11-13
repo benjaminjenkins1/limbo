@@ -6,7 +6,7 @@ require('includes/logged_in.php');
 
 $errors='';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $fname = trim($_POST['fname']);
     $lname = trim($_POST['lname']);

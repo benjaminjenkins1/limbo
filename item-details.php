@@ -49,7 +49,12 @@ else{
             <p><?php echo $name; ?></p>
             <p><b>Description:</b></p>
             <p><?php echo $description; ?></p>
-            <p><b>Date lost:</b></p>
+            <?php
+            if($status === 'lost')
+                echo '<p><b>Date lost:</b></p>';
+            else if($status === 'found')
+                echo '<p><b>Date found:</b></p>';
+            ?>
             <p><?php echo $lost_date; ?></p>
             <?php
             if($update_date != $create_date)
