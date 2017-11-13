@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 Email: <br><input class="login-field" type="text" name="email"> <br>
                 Password: <br><input class="login-field" type="password" name="password"><br>
                 <input class="login-submit" type="submit" value="Log in"><br>
-                <p><a href="/changepassword.php">Change password</a></p>
+                <a href="/changepassword.php">Change password</a>
             </form>
             </div>
         </div>
