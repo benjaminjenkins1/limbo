@@ -6,5 +6,5 @@ Remember me
 Images
 About page
 CSS improvements
-Better salt generator
+Better random character generator
 Prepared SQL statements
