@@ -15,7 +15,7 @@ h1{
 }
 
 header{
-    background-color: #FF0000;
+    background-color: #C10000;
     height: 50px;
     box-shadow: 0px 3px 5px #888888;
 }
@@ -83,7 +83,7 @@ header{
     justify-content: space-evenly;
 }
 .lf-link{
-    background-color: #FF0000;
+    background-color: #C10000;
     text-align:center;
     height:40px;
     border: none;
@@ -96,12 +96,13 @@ header{
     text-decoration: none;
 }
 
-.login-form{
+.page-body{
     display: inline-block;
     text-align: left;
-    margin-left: 100px;
+    margin-left: 80px;
     margin-top: 20px;
 }
+
 .form-container{
     text-align: left;
     width: 100%;
@@ -138,6 +139,10 @@ header{
     margin: 0 auto;
     width: 80%;
 }
+.items-list a{
+    color: black;
+    text-decoration: none;
+}
 .items-list table{
     background-color: #CCCCCC;
     width: 100%;
@@ -160,7 +165,7 @@ header{
     position:relative;
     top:30px;
     left:145px;
-    background-color: #FF0000;
+    background-color: #C10000;
     text-align:center;
     height:40px;
     border: none;
@@ -169,6 +174,21 @@ header{
     color: white;
     text-decoration: none;
     padding: 10px 20px 10px 20px;
+}
+
+.edit-delete{
+    background-color: #C10000;
+    text-align:center;
+    height:40px;
+    border: none;
+    border-radius: 5px;
+    vertical-align: middle;
+    width: 40%;
+    font-size: 1.2em;
+    color: white;
+    line-height: 40px;
+    text-decoration: none;
+    padding: 2px 10px 2px 10px;
 }
 
 footer{

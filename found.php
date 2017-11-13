@@ -5,6 +5,12 @@ require('includes/helpers.php');
 
 $errors = '';
 
+if(!$logged_in){
+    session_start( );
+    header("Location: /login.php");
+    exit();
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $name = $_POST['name'];
@@ -53,14 +59,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <h1>Report an item you found</h1>
-            <?php echo $errors ?>
+            <div class="page-body">
+            <?php echo '<p style="color:red;">' . $errors . '</p>'; ?>
             <form action="found.php" method="POST">
                 Item name:<br>
-                <input type="text" class="report-text" name="name"><br>
+                <input type="text" class="report-text" name="name" value="<?php if(isset($name)) echo $name; ?>"><br>
                 Item description:<br>
-                <textarea class="report-textarea" name="description"></textarea><br>
+                <textarea class="report-textarea" name="description"><?php if(isset($description)) echo $description; ?></textarea><br>
                 Location found:<br>
-                <select name="loc_id" class="report-select">
+                <select name="loc_id" class="report-select" value="<?php if(isset($loc_id)) echo $loc_id; ?>">
                     <?php
                     $locations = get_locations();
                     foreach($locations as $loc){
@@ -69,9 +76,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     ?>
                 </select><br>
                 Date found:<br>
-                <input type="date" class="report-date" name="lost_date"><br>
+                <input type="date" class="report-date" name="lost_date" value="<?php if(isset($lost_date)) echo $lost_date; ?>"><br>
                 <input class="login-submit" type="submit" value="Submit">
             </form>
+            </div>
         </div>
     </div>
     <?php require('includes/footer.php'); ?>

@@ -7,18 +7,17 @@ function show_items($time, $sort, $page){
 
     $first_result_index = ($page - 1) * 10;
 
-    $query = 'SELECT item_id, name, description, lost_date, status FROM items';
+    $query = 'SELECT item_id, name, description, lost_date, status FROM items WHERE update_date > NOW() - INTERVAL ' . $time . ' DAY';
     
-    $query = $query . ' WHERE update_date > NOW() - INTERVAL ' . $time . ' DAY';
-    
-    if($sort == 'newest'){
+    if($sort === 'newest'){
         $query = $query . ' ORDER BY update_date DESC';
     }
-    else if($sort == 'oldest'){
+    else if($sort === 'oldest'){
         $query = $query . ' ORDER BY update_date ASC';
     }
 
     $query = $query . ' LIMIT 10 OFFSET ' . $first_result_index;
+    #echo $query;
 
     $results = mysqli_query($dbc, $query);
 
@@ -46,11 +45,19 @@ function show_items($time, $sort, $page){
 
 }
 
-function get_num_pages(){
+function get_num_pages($time, $sort){
 
     require('includes/connect_db.php');
 
-    $query = 'SELECT * FROM items';
+    $query = 'SELECT * FROM items WHERE update_date > NOW() - INTERVAL ' . $time . ' DAY';
+    
+    if($sort === 'newest'){
+        $query = $query . ' ORDER BY update_date DESC';
+    }
+    else if($sort === 'oldest'){
+        $query = $query . ' ORDER BY update_date ASC';
+    }
+    
     $results = mysqli_query($dbc, $query);
     $rowcount=mysqli_num_rows($results);
     mysqli_free_result($results);

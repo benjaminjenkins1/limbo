@@ -38,12 +38,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <h1>Log In</h1>
-            <div class="form-container">
-            <form class="login-form" action="/login.php" method="post">
+            <div class="page-body">
+            <form action="/login.php" method="post">
                 <?php if(isset($wrongpassword)) echo '<p style="color:red;">Incorrect username or pasword</p>'; ?>
                 Email: <br><input class="login-field" type="text" name="email"> <br>
                 Password: <br><input class="login-field" type="password" name="password"><br>
-                <input class="login-submit" type="submit" value="Log in"><br>
+                <input class="login-submit" type="submit" value="Log in"><br><br>
                 <a href="/changepassword.php">Change password</a>
             </form>
             </div>

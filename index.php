@@ -3,7 +3,7 @@
 require('includes/logged_in.php');
 require('includes/items.php');
 
-$time = 7;
+$time = 365;
 $sort = 'newest';
 
 if(isset($_GET['time']))
@@ -17,7 +17,7 @@ $page = 1;
 if(isset($_GET['page']))
     $page = intval($_GET['page']);
 
-$num_pages = get_num_pages();
+$num_pages = get_num_pages($time, $sort);
 
 ?>
 
@@ -43,7 +43,7 @@ $num_pages = get_num_pages();
             </div>
             <div class="list-options">
                 Sort by:
-                <select id="sort-select" onchange="changeSort()">
+                <select id="sort-select" onchange="changeSort(<?php echo $time; ?>)">
                     <option <?php if($sort == 'newest') echo 'selected="selected"'; ?> value="newest">newest first</option>
                     <option <?php if($sort == 'oldest') echo 'selected="selected"'; ?> value="oldest">oldest first</option>
                 </select>

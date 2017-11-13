@@ -41,18 +41,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <h1>Register</h1>
-            <form class="login-form" action="register.php" method="POST">
-                <div class="register-errors"><?php echo $errors; ?></div><br>
-                First name:<br>
-                <input type="text" class="login-field" name="fname"><br>
-                Last name:<br>
-                <input type="text" class="login-field" name="lname"><br>
-                Email:<br>
-                <input type="text" class="login-field" name="email"><br>
-                Password:<br>
-                <input class="login-field" type="password" name="password"><br>
-                <input class="login-submit" type="submit">
-            </form>
+            <div class="page-body">
+                <form action="register.php" method="POST">
+                    <div class="register-errors"><?php echo $errors; ?></div><br>
+                    First name:<br>
+                    <input type="text" class="login-field" name="fname"><br>
+                    Last name:<br>
+                    <input type="text" class="login-field" name="lname"><br>
+                    Email:<br>
+                    <input type="text" class="login-field" name="email"><br>
+                    Password:<br>
+                    <input class="login-field" type="password" name="password"><br>
+                    <input class="login-submit" type="submit">
+                </form>
+            </div>
         </div>
     </div>
     <?php require('includes/footer.php'); ?>

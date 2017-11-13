@@ -22,5 +22,7 @@ if(isset($_COOKIE['limbo_logged_in'])){
 }
 else{
     $logged_in = false;
+    $logged_in_id = false;
+    $logged_in_level = false;
 }
 ?>
