@@ -1,6 +1,6 @@
-Admin page and header link
+Admin manage users page
 Sidebar
-Remember me
+Remember me function
 Images
 About page
 CSS improvements
