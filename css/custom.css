@@ -40,6 +40,13 @@ header{
     top: 4px;
     left: 188px;
 }
+.logged-in-as{
+    font-size: .85em;
+    margin-right: 15px;
+    color: white;
+    position: relative;
+    top: 5px;
+}
 .account-links{
     float: right;
     padding-top: 14px;

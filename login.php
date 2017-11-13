@@ -1,6 +1,7 @@
 <?php
 
 require('includes/login_helpers.php');
+require('includes/logged_in.php');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 

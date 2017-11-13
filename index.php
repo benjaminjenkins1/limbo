@@ -1,5 +1,6 @@
 <?php
 
+require('includes/logged_in.php');
 require('includes/items.php');
 
 $time = 7;

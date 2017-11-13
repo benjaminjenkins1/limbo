@@ -1,6 +1,6 @@
 <?php
 
-$logged_in = false;
+
 
 ?>
 
@@ -22,6 +22,7 @@ $logged_in = false;
                 echo '<a class="account-link" href="/register.php">Register</a>';
             } 
             else{
+                echo '<span class="logged-in-as">Logged in as ' . $logged_in_fname . '</span>';
                 echo '<a class="account-link" href="/logout.php">Log Out</a>';
             }
         ?>

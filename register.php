@@ -2,6 +2,7 @@
 
 require('includes/connect_db.php');
 require('includes/registration_helpers.php');
+require('includes/logged_in.php');
 
 $errors='';
 

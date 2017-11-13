@@ -1,3 +1,9 @@
+<?php
+
+require('includes/logged_in.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>

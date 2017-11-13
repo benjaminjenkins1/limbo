@@ -1,5 +1,6 @@
 <?php
 
+require('includes/logged_in.php');
 require('includes/connect_db.php');
 
 if(!isset($_GET['id'])){
