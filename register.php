@@ -52,6 +52,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     <input type="text" class="login-field" name="email"><br>
                     Password:<br>
                     <input class="login-field" type="password" name="password"><br>
+                    Re-type Password:<br>
+                    <input class="login-field" type="password" name="retype_password"><br>
                     <input class="login-submit" type="submit">
                 </form>
             </div>

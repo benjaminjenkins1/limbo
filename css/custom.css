@@ -125,6 +125,7 @@ header{
     height: 100%;
     float: left;
     width: 250px;
+    overflow: scroll;
 }
 .sidebar-title{
     background-color: #808080;
@@ -133,6 +134,19 @@ header{
 }
 .sidebar-title a{
     color: #CCCCCC;
+}
+.sidebar-noitems{
+    color: #CCCCCC;
+    padding: 5px 0 5px 12px;
+}
+.sidebar-table{
+    color: #CCCCCC;
+    padding: 5px 0 0 12px;
+    width: 100%;
+    border-bottom: 2px solid #2d2d2d;
+}
+.sidebar-link{
+    text-decoration: none;
 }
 
 .items-list{
@@ -204,4 +218,12 @@ footer{
 }
 .footer-author a{
     color: #E0E0E0;
+}
+
+.searchform{
+    float: right;
+}
+.searchbutton{
+    height: 10px;
+    box-sizing: content-box;
 }

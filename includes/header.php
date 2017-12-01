@@ -25,6 +25,9 @@
                 echo '<span class="logged-in-as">Logged in as ' . $logged_in_fname . '</span>';
                 echo '<a class="account-link" href="/logout.php">Log Out</a>';
             }
+            if($logged_in_level === 'admin'){
+                echo '<a class="account-link" href="/admin.php">Admin</a>';
+            }
         ?>
     </div>
 </header>

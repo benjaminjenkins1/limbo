@@ -47,6 +47,10 @@ $num_pages = get_num_pages($time, $sort);
                     <option <?php if($sort == 'newest') echo 'selected="selected"'; ?> value="newest">newest first</option>
                     <option <?php if($sort == 'oldest') echo 'selected="selected"'; ?> value="oldest">oldest first</option>
                 </select>
+                <form class="searchform" action="search.php">
+                    <input type="text" placeholder="Search" name="searchterm">
+                    <input class="searchbutton" type="submit" value="&#128269;">
+                </form>
             </div>  
             <?php 
             
@@ -55,7 +59,15 @@ $num_pages = get_num_pages($time, $sort);
             echo '<p class="page-numbers">Page:';
 
             for ($i = 1; $i <= $num_pages; $i++) {
-                echo ' <a href="/index.php?page=' . $i . '&sort=' . $sort . '&time=' . $time . '">' . $i . '</a> ';
+                if($page == $i){
+                    echo ' <b><a href="/index.php?page=' . $i . '&sort=' . $sort . '&time=' . $time . '">' . $i . '</a></b> ';
+                }
+                else if(!isset($_GET['page']) && $i == 1){
+                    echo ' <b><a href="/index.php?page=' . $i . '&sort=' . $sort . '&time=' . $time . '">' . $i . '</a></b> ';
+                }
+                else{
+                    echo ' <a href="/index.php?page=' . $i . '&sort=' . $sort . '&time=' . $time . '">' . $i . '</a> ';
+                }
             }
 
             echo '</p>';

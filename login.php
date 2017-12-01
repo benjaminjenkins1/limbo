@@ -5,12 +5,16 @@ require('includes/logged_in.php');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if(isset($_POST['email'])) $email = $_POST['email'];
+    else $email = '';
+    if(isset($_POST['password'])) $password = $_POST['password'];
+    else $password= '';
+    if(isset($_POST['remember'])) $remember =$_POST['remember'];
+    else $remember = '';
 
     if(user_validated($email, $password)){
-        new_cookie($email);
-        session_start( );
+        new_cookie($email, $remember);
+        session_start();
         header("Location: /index.php");
         exit();
     }
@@ -40,11 +44,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <h1>Log In</h1>
             <div class="page-body">
             <form action="/login.php" method="post">
-                <?php if(isset($wrongpassword)) echo '<p style="color:red;">Incorrect username or pasword</p>'; ?>
-                Email: <br><input class="login-field" type="text" name="email"> <br>
+                <?php if(isset($wrongpassword)) echo '<p style="color:red;">Incorrect email or pasword</p>'; ?>
+                Email: <br><input class="login-field" type="text" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"> <br>
                 Password: <br><input class="login-field" type="password" name="password"><br>
+                <br><input type="checkbox" name="remember"> Remember me<br>
                 <input class="login-submit" type="submit" value="Log in"><br><br>
-                <a href="/changepassword.php">Change password</a>
+                <a href="/changepassword.php">Change password</a><br><br>
+                <a href="/register.php">Register</a>
             </form>
             </div>
         </div>

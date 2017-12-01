@@ -38,7 +38,7 @@ function user_validated($email, $password){
     return false;
 }
 
-function new_cookie($email){
+function new_cookie($email, $remember){
 
     require('includes/connect_db.php');
     require('includes/helpers.php');
@@ -63,7 +63,12 @@ function new_cookie($email){
         return false;
     }
     else{
-        setcookie('limbo_logged_in', $cookie_contents);
+        if($remember === 'on'){
+            setcookie('limbo_logged_in', $cookie_contents, time()+60*60*24*30);
+        }
+        else{
+            setcookie('limbo_logged_in', $cookie_contents);
+        }
     }
 }
 

@@ -2,16 +2,16 @@
 
 require('includes/logged_in.php');
 
-$item_id = $_GET['id'];
+$u_id = $_GET['id'];
 
-if(!$logged_in){
+if(!$logged_in_level == 'admin'){
     session_start( );
     header("Location: /550.php");
     exit();
 }
 
 else{
-    $query = 'UPDATE items SET status="claimed", claimer_id=' . $logged_in_id . ' WHERE item_id=' . $item_id;
+    $query = 'UPDATE users SET level="admin" WHERE u_id=' . $u_id;
     $results = mysqli_query($dbc, $query);
     if($results != true){
         echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
@@ -25,7 +25,7 @@ else{
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Limbo - Claim item</title>
+    <title>Limbo - Promote</title>
     <meta name="author" content="Benjamin Jenkins">
     <meta name="description" content="Limbo lost and found report an item you found">
     <meta name="keywords" content="lost and found, limbo, found, report">
@@ -38,8 +38,7 @@ else{
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <div class="page-body">
-                <h1>Thank you</h1>
-                <p>Thank you for claiming this item, the owner will be notified that you have claimed it.<p>
+                <p>User with ID <?php echo $u_id; ?> has been promoted to an administrator</p>
             </div>
         </div>
     </div>

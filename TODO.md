@@ -1,9 +1,5 @@
-Admin manage users page
-Sidebar
-Remember me function
+Delete user
 Images
-About page
 CSS improvements
-Better random character generator
+Pass_hash function
 Prepared SQL statements
-Captcha

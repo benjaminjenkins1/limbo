@@ -46,8 +46,30 @@ else{
     <div class="content-container">
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
-            <h1><?php echo ucfirst($status); ?> item details</h1>
+            <h1><?php echo ucfirst($status); ?> Item details</h1>
             <div class="page-body">
+                <?php
+
+                if($status == 'claimed' && $logged_in_id != $owner_id){
+                    echo '<p><h2>This item has been claimed</h2></p>';
+                }
+                if($status == 'claimed' && $logged_in_id == $owner_id){
+
+                    $query = 'SELECT * FROM items, users WHERE items.item_id=' . $_GET['id'] . ' AND users.u_id = items.claimer_id';
+                    $results = mysqli_query($dbc, $query);
+                    
+                    if($results != true)
+                        echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
+                    
+                    else{
+                        $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
+                        $claimer_fname = $row['fname'];
+                        $claimer_email = $row['email'];
+                    }
+                    echo '<p><h2>Your item has been claimed by ' . $claimer_fname . ' (' . $claimer_email . ')</h2></p>';
+                }
+
+                ?>
                 <p><b>Item name:</b></p>
                 <p><?php echo $name; ?></p>
                 <p><b>Description:</b></p>
@@ -71,20 +93,21 @@ else{
                 <?php
                 if($logged_in_level === 'admin' || $logged_in_id == $owner_id){
                     echo '<a class="edit-delete" href="/edit-item.php?id=' . $id . '">Edit this item</a><br>';
-                    echo '<a class="edit-delete" href="/delete-item.php?id=' . $id . '">Delete this item</a>';
+                    echo '<a class="edit-delete" href="/delete-item.php?id=' . $id . '">Delete this item</a><br>';
                 }
-                else if($logged_in && $status === 'lost'){
-                    echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">I found this item</a>';
+                if($is_logged_in && $status === 'lost' && $logged_in_id != $owner_id){
+                    echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">I found this item</a><br>';
                 }
-                else if($logged_in && $status === 'found'){
-                    echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">Claim this item</a>';
+                if($is_logged_in && $status === 'found' && $logged_in_id != $owner_id){
+                    echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">Claim this item</a><br>';
                 }
-                else if($status === 'lost'){
+                if(!$is_logged_in && $status === 'lost'){
                     echo '<a class="edit-delete" href="/login.php">Log in to say you found this item</a>';
                 }
-                else if($status === 'found'){
+                if(!$is_logged_in && $status === 'found'){
                     echo '<a class="edit-delete" href="/login.php">Log in to claim this item</a>';
                 }
+                
                 ?>
             </div>
         </div>

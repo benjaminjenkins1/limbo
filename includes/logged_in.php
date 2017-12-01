@@ -13,16 +13,17 @@ if(isset($_COOKIE['limbo_logged_in'])){
     }
     else{
         $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
+        $logged_in = true;
+        $is_logged_in = true;
         $logged_in_fname = $row['fname'];
         $logged_in_id = $row['u_id'];
         $logged_in_level = $row['level'];
         mysqli_free_result($results);
-        $logged_in = true;
     }
 }
 else{
-    $logged_in = false;
     $logged_in_id = false;
     $logged_in_level = false;
 }
+
 ?>

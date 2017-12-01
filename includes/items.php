@@ -7,7 +7,7 @@ function show_items($time, $sort, $page){
 
     $first_result_index = ($page - 1) * 10;
 
-    $query = 'SELECT item_id, name, description, lost_date, status FROM items WHERE update_date > NOW() - INTERVAL ' . $time . ' DAY';
+    $query = 'SELECT item_id, name, description, lost_date, status FROM items WHERE update_date > NOW() - INTERVAL ' . $time . ' DAY AND status<>"claimed"';
     
     if($sort === 'newest'){
         $query = $query . ' ORDER BY update_date DESC';

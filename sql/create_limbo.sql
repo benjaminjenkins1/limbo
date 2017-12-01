@@ -49,7 +49,7 @@ CREATE TABLE items(
     update_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     owner_id INTEGER NOT NULL,
     claimer_id INTEGER,
-    status ENUM('lost','found'),
+    status ENUM('lost','found', 'claimed') NOT NULL,
     FOREIGN KEY (loc_id) REFERENCES locations(loc_id),
     FOREIGN KEY (owner_id) REFERENCES users(u_id),
     FOREIGN KEY (claimer_id) REFERENCES users(u_id)
