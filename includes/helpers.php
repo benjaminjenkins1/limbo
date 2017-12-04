@@ -1,14 +1,8 @@
 <?php
 
-function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'){
-    $str = '';
-    $max = mb_strlen($keyspace, '8bit') - 1;
-    for ($i = 0; $i < $length; ++$i) {
-        $str .= $keyspace[rand(0, $max)];
-    }
-    return $str;
-}
-
+/*
+Return an array of locations from the locations table
+*/
 function get_locations(){
     require('includes/connect_db.php');
     $query = 'SELECT * FROM locations';
@@ -19,6 +13,8 @@ function get_locations(){
         return false;
     }
     $row_index = 0;
+
+    # Add the location in each row to the array
     while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
         $locations[$row_index] = array($row['loc_id'], $row['name']);
         $row_index ++;
@@ -26,6 +22,10 @@ function get_locations(){
     return $locations;
 }
 
+/*
+Validates (checks if empty) the item information
+Builds and returns an error string
+*/
 function validate_item($name, $description, $loc_id, $lost_date){
     $errors = '';
     if(empty($name))

@@ -20,3 +20,16 @@ for (var i = 0, len = labels.length; i < len; i++) {
     }
 
 }
+
+function checkSame(){
+    var first = document.getElementById('type_password').value;
+    var second = document.getElementById('retype_password').value;
+
+    if(first === second){
+        document.forms[0].submit();
+    }
+    else{
+        alert('Passwords must match');
+        return false;
+    }
+}

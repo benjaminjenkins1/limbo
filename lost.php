@@ -3,6 +3,7 @@
 require('includes/logged_in.php');
 require('includes/helpers.php');
 
+# If the user is not logged in, send them to the login page
 if(!$logged_in){
     session_start( );
     header("Location: /login.php");
@@ -20,6 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $errors = validate_item($name, $description, $loc_id, $lost_date);
 
+    # If the information is valid, insert the item into the database
     if(empty($errors)){
         $lost_date = $lost_date . ' 00:00:00';
         $query = 'INSERT INTO items (loc_id, name, description, lost_date, owner_id, status) VALUES (' . $loc_id . ', "' . $name . '", "' . $description . '", "' . $lost_date . '", ' . $logged_in_id . ', "lost")';
@@ -29,6 +31,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
             mysqli_free_result($results);
         }
+
+        # If everyhthing went according to plan, send the user to the details page for the new item
         else{
             $item_id = mysqli_insert_id($dbc);
             mysqli_free_result($results);        
@@ -61,10 +65,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div class="page-content">
             <h1>Report an item lost</h1>
             <div class="page-body">
-            <?php '<p style="color:red;">' . $errors . '</p>'; ?>
+            <?php echo '<p style="color:red;">' . $errors . '</p>'; ?>
             <form action="lost.php" method="POST">
+            <!-- php sticky form -->
                 Item name:<br>
-                <input type="text" class="report-text" name="name" value="<?php if(isset($name)) echo $name; ?>"><br>
+                <input autofocus type="text" class="report-text" name="name" value="<?php if(isset($name)) echo $name; ?>"><br>
                 Item description:<br>
                 <textarea class="report-textarea" name="description"><?php if(isset($description)) echo $description; ?></textarea><br>
                 Location lost:<br>

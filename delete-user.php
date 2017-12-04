@@ -2,18 +2,19 @@
 
 require('includes/logged_in.php');
 
-$item_id = $_GET['id'];
+$u_id = $_GET['id'];
 
-# If the user is not logged in, redirect to the 550 page
-if(!$logged_in){
+# If the user is not an admin, send them to the 550 page
+if(!$logged_in_level == 'admin'){
     session_start( );
     header("Location: /550.php");
     exit();
 }
 
-# Set the statis of the item to claimed in the database, and the claimer id to the logged in user's id
+# Otherwise, delete the user whose id is in the request to an admin 
+# This should probably be changed to require the admin's username and password instead of them simply being logged in
 else{
-    $query = 'UPDATE items SET status="claimed", claimer_id=' . $logged_in_id . ' WHERE item_id=' . $item_id;
+    $query = 'DELETE FROM users WHERE u_id=' . $u_id;
     $results = mysqli_query($dbc, $query);
     if($results != true){
         echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
@@ -27,7 +28,7 @@ else{
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Limbo - Claim item</title>
+    <title>Limbo - Delete user</title>
     <meta name="author" content="Benjamin Jenkins">
     <meta name="description" content="Limbo lost and found report an item you found">
     <meta name="keywords" content="lost and found, limbo, found, report">
@@ -40,8 +41,7 @@ else{
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">
             <div class="page-body">
-                <h1>Thank you</h1>
-                <p>Thank you for claiming this item, the owner will be notified that you have claimed it.<p>
+                <p>User with ID <?php echo $u_id; ?> has been deleted</p>
             </div>
         </div>
     </div>

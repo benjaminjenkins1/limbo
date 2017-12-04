@@ -5,6 +5,7 @@ require('includes/helpers.php');
 
 $errors = '';
 
+# If the user os not logged in, send them to the login page
 if(!$logged_in){
     session_start( );
     header("Location: /login.php");
@@ -13,6 +14,7 @@ if(!$logged_in){
 
 $item_id = $_GET['id'];
 
+# Run query to get the item's info, to display the current information in the form
 $query = 'SELECT * FROM items WHERE item_id=' . $item_id;
 $results = mysqli_query($dbc, $query);
 if($results != true){
@@ -31,6 +33,7 @@ else{
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+    # If the user is not an admin or the owner, send them to the 550 page
     if($logged_in_id != $owner_id || $logged_in_level != 'admin'){
         session_start( );
         header("Location: /550.php");
@@ -45,6 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $errors = validate_item($name, $description, $loc_id, $lost_date);
 
+    # If there are no problems with the values, update the item in the database
     if(empty($errors)){
         $lost_date = $lost_date . ' 00:00:00';
         $query = 'UPDATE items SET name="' . $name . '", description="' . $description . '", lost_date="' . $lost_date . '" WHERE item_id =' . $_GET['id'];
@@ -54,6 +58,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
             mysqli_free_result($results);
         }
+
+        # If everything went according to plan, send the user back to the item details page so they can see the changes
         else{
             $item_id = mysqli_insert_id($dbc);
             mysqli_free_result($results);        
@@ -87,6 +93,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <div class="page-body">
             <?php echo '<p style="color:red;">' . $errors . '</p>'; ?>
             <form action="found.php" method="POST">
+            <!-- php sticky form -->
                 Item name:<br>
                 <input type="text" class="report-text" name="name" value="<?php if(isset($name)) echo $name; ?>"><br>
                 Item description:<br>

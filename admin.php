@@ -3,6 +3,7 @@
 require('includes/logged_in.php');
 require('includes/users.php');
 
+# If the user is not logged in as admin, redirect to 550 page
 if($logged_in_level != 'admin'){
     session_start( );
     header("Location: /550.php");

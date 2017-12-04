@@ -3,12 +3,14 @@
 require('includes/logged_in.php');
 require('includes/connect_db.php');
 
+# If for some reason there is no id in the request, return to the homepage
 if(!isset($_GET['id'])){
     session_start( );
     header("Location: /index.php");
     exit();
 } 
 
+# Get the item info from the database
 $id = $_GET['id'];
 $query = 'SELECT items.name AS item_name, description, lost_date, items.update_date AS update_date, items.create_date AS create_date, status, owner_id, locations.name AS loc_name FROM items, locations WHERE items.loc_id=locations.loc_id AND item_id=' . $id;
 $results = mysqli_query($dbc, $query);
@@ -50,17 +52,22 @@ else{
             <div class="page-body">
                 <?php
 
+                # Case where the item is claimed and the logged in user is not the owner
                 if($status == 'claimed' && $logged_in_id != $owner_id){
                     echo '<p><h2>This item has been claimed</h2></p>';
                 }
+                
+                # Case where the item is claimed and the logged in user is the owner
                 if($status == 'claimed' && $logged_in_id == $owner_id){
 
+                    # Get the item information from the database
                     $query = 'SELECT * FROM items, users WHERE items.item_id=' . $_GET['id'] . ' AND users.u_id = items.claimer_id';
                     $results = mysqli_query($dbc, $query);
                     
                     if($results != true)
                         echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
-                    
+
+                    # Show the claimer's email and first name
                     else{
                         $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
                         $claimer_fname = $row['fname'];
@@ -77,6 +84,7 @@ else{
                 <p><b>Location lost:</b></p>
                 <p><?php echo $loc_name; ?></p>
                 <?php
+                # Show "date lost" or "date found" based on the item status
                 if($status === 'lost')
                     echo '<p><b>Date lost:</b></p>';
                 else if($status === 'found')
@@ -84,6 +92,7 @@ else{
                 ?>
                 <p><?php echo $lost_date; ?></p>
                 <?php
+                # If the item has been updated, show the update date, otherwise, say "never"
                 if($update_date != $create_date)
                     echo '<p><b>Last updated:</b></p><p>' . $update_date . '</p>';
                 else
@@ -91,20 +100,34 @@ else{
                 ?>
                 
                 <?php
+                # Case where the user is the admin or owner of the item
+                # Shows Edit and delete buttons
                 if($logged_in_level === 'admin' || $logged_in_id == $owner_id){
                     echo '<a class="edit-delete" href="/edit-item.php?id=' . $id . '">Edit this item</a><br>';
                     echo '<a class="edit-delete" href="/delete-item.php?id=' . $id . '">Delete this item</a><br>';
                 }
-                if($is_logged_in && $status === 'lost' && $logged_in_id != $owner_id){
+
+                # Case where the user is logged in, not the owner, and the item is lost
+                # Shows the "I found it" button
+                if($logged_in && $status === 'lost' && $logged_in_id != $owner_id){
                     echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">I found this item</a><br>';
                 }
-                if($is_logged_in && $status === 'found' && $logged_in_id != $owner_id){
+
+                # Case where the user is logged in, is not the owner, and the item is found
+                # Shows the "claim" button
+                if($logged_in && $status === 'found' && $logged_in_id != $owner_id){
                     echo '<a class="edit-delete" href="/claim-item.php?id=' . $id . '">Claim this item</a><br>';
                 }
-                if(!$is_logged_in && $status === 'lost'){
+
+                # Case where the user is not logged in and the item is lost
+                # Shows "Log in to say you found it"
+                if(!$logged_in && $status === 'lost'){
                     echo '<a class="edit-delete" href="/login.php">Log in to say you found this item</a>';
                 }
-                if(!$is_logged_in && $status === 'found'){
+
+                # Case where the user is not logged in and the item is found
+                # Shows "Log in to claim"
+                if(!$logged_in && $status === 'found'){
                     echo '<a class="edit-delete" href="/login.php">Log in to claim this item</a>';
                 }
                 

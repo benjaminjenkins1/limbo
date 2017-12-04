@@ -1,5 +1,9 @@
 <?php
 
+/*
+Validates a set of registration info (the arguments)
+Builds an error string with any errors
+*/
 function validate_registration($fname, $lname, $email, $password){
 
     $errors='';
@@ -28,7 +32,6 @@ function validate_registration($fname, $lname, $email, $password){
 
     # Validate email with regex
     $email_pattern = '/.+' . preg_quote('@marist.edu') . '/';
-    # Thanks to email-regex.com
     if(!empty($email) and !preg_match($email_pattern,$email))
         $errors = $errors . 'Invalid email';
 
@@ -36,23 +39,25 @@ function validate_registration($fname, $lname, $email, $password){
 
 }
 
+/*
+Adds a user to the database
+*/
 function register_user($fname,$lname,$email,$password){
 
     require('includes/connect_db.php');
     require('includes/helpers.php');
 
-    $salt = random_str(16);
-    $hashed_pw = hash('sha256', $salt . $password);
+    $pass_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = 'INSERT INTO users (email, pass_hash, pass_salt, fname, lname) VALUES ("' . $email . '", "' . $hashed_pw . '", "' . $salt . '", "' . $fname . '", "' . $lname . '")';
+    $query = 'INSERT INTO users (email, pass_hash, fname, lname) VALUES ("' . $email . '", "' . $pass_hash . '", "' . $fname . '", "' . $lname . '")';
     
     $results = mysqli_query($dbc, $query);
 
     if($results != true){
         echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
-        mysqli_free_result($results);
     }
 
+    # If the registration was successful, send the user to the thankyou page
     else{
         mysqli_free_result($results);        
         session_start( );

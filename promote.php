@@ -4,12 +4,15 @@ require('includes/logged_in.php');
 
 $u_id = $_GET['id'];
 
+# If the user is not an admin, send them to the 550 page
 if(!$logged_in_level == 'admin'){
     session_start( );
     header("Location: /550.php");
     exit();
 }
 
+# Otherwise, promote the user whose id is in the request to an admin 
+# This should probably be changed to require the admin's username and password instead of simply being logged in
 else{
     $query = 'UPDATE users SET level="admin" WHERE u_id=' . $u_id;
     $results = mysqli_query($dbc, $query);
