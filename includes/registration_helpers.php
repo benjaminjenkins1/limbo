@@ -61,7 +61,7 @@ function register_user($fname,$lname,$email,$password){
     else{
         mysqli_free_result($results);        
         session_start( );
-        header("Location: /registration_thankyou.php");
+        header("Location: /registration-thankyou.php");
         exit();
 
     }
