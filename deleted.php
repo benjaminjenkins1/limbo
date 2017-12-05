@@ -1,3 +1,9 @@
+<?php
+
+require('includes/logged_in.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +16,7 @@
     <link rel="stylesheet" href="/css/custom.css" type="text/css">
     </head>
     <body>
-    <?php require"includes/header.php"; ?>
+    <?php require('includes/header.php'); ?>
     <div class="content-container">
         <?php require('includes/sidebar.php'); ?>
         <div class="page-content">

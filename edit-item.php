@@ -40,8 +40,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         exit();
     }
 
-    $name = $_POST['name'];
-    $description = $_POST['description'];
+    # Strip tags from name and description
+    $name = strip_tags($_POST['name']);
+    $description = strip_tags($_POST['description']);
     $loc_id = $_POST['loc_id'];
     $lost_date = $_POST['lost_date'];
     $item_id = $_POST['item_id'];

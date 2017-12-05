@@ -1,32 +1,13 @@
 <?php
 
+
+require('includes/connect_db.php');
 require('includes/logged_in.php');
 require('includes/items.php');
-require('includes/connect_db.php');
 
-
-
-# Look for the admin account in the database, create the admin account with the default password if it does not exist
-$query = 'SELECT * FROM users WHERE email="admin"';
-$results = mysqli_query($dbc, $query);
-if($results != true){
-    echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
-    mysqli_free_result($results);
-}
-else{
-    # If there is not a result, insert the default admin account into the users table
-    if(mysqli_num_rows($results) == 0){
-        $pass_hash = password_hash('gaze11e', PASSWORD_DEFAULT);
-        $query = 'INSERT INTO users (email, pass_hash, fname, lname, level) VALUES ("admin", "' . $pass_hash . '", "Owner", "Owner", "admin")';
-        $results = mysqli_query($dbc, $query);
-        if($results != true){
-            echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>';
-            mysqli_free_result($results);
-        }
-        else{
-            echo 'Default admin not found, created default admin with email "admin" and password "gaze11e"';
-        }
-    }
+# If limbo has just been installed, show a messsage
+if($_GET['install'] === 'true'){
+    echo 'The limbo database has been created<br>The default admin has email "admin" and password "gaze11e"';
 }
 
 # Time is 365 days and sort is newest unless set in the request

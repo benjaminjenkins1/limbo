@@ -18,7 +18,7 @@ if($results != true){
 # Send the user to the homepage
 else{
     mysqli_free_result($results);        
-    session_start( );
+    session_start();
     header("Location: /index.php");
     exit();
 }

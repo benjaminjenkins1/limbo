@@ -9,9 +9,9 @@ $errors='';
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     # Clean up the inputs
-    $fname = trim($_POST['fname']);
-    $lname = trim($_POST['lname']);
-    $email = trim($_POST['email']);
+    $fname = strip_tags(trim($_POST['fname']));
+    $lname = strip_tags(trim($_POST['lname']));
+    $email = strip_tags(trim($_POST['email']));
     $password = trim($_POST['password']);
 
     $errors=validate_registration($fname,$lname,$email,$password);
