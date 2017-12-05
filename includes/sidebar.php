@@ -1,3 +1,13 @@
+<?php
+
+if(!isset($logged_in)){
+    $logged_in = false;
+    $logged_in_fname = '';
+    $logged_in_level = '';
+}
+
+?>
+
 <div class="sidebar">
     <?php
     /*

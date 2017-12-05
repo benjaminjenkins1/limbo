@@ -1,13 +1,16 @@
 <?php
 
 
+
 require('includes/connect_db.php');
 require('includes/logged_in.php');
 require('includes/items.php');
 
 # If limbo has just been installed, show a messsage
-if($_GET['install'] === 'true'){
-    echo 'The limbo database has been created<br>The default admin has email "admin" and password "gaze11e"';
+if(isset($_GET['install'])){
+    if($_GET['install'] === 'true'){
+        echo 'The limbo database has been created<br>The default admin has email "admin" and password "gaze11e"';
+    }
 }
 
 # Time is 365 days and sort is newest unless set in the request

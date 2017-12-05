@@ -1,3 +1,13 @@
+<?php
+
+if(!isset($logged_in)){
+    $logged_in = false;
+    $logged_in_fname = '';
+    $logged_in_level = '';
+}
+
+?>
+
 <header>
     <a href="/index.php">
         <div class="site-title">

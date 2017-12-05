@@ -1,7 +1,7 @@
 <?php 
 
 # Connect to mysql database
-$dbc = @mysqli_connect ( 'localhost', 'root', 'root', 'limbo_db' );
+$dbc = @mysqli_connect ( 'localhost', 'root', '', 'limbo_db' );
 if(mysqli_connect_error() === "Unknown database 'limbo_db'"){
     require('includes/install.php');
     install_limbo();
